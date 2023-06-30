@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.bekbol_3_5_.databinding.FragmentFragment1Binding
 
@@ -25,14 +26,6 @@ class fragment1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         plusAndMinus()
-    }
-
-    private fun sendData() {
-        val bundle = Bundle()
-        bundle.putString("Bekbol", binding.tvmeaning.text.toString())
-        val resultFragment = fragment2()
-        resultFragment.arguments = bundle
-        findNavController().navigate(R.id.fragment2, bundle)
     }
 
     private fun plusAndMinus() {
@@ -58,7 +51,7 @@ class fragment1 : Fragment() {
                         false ->
                             binding.tvmeaning.text = count--.toString()
 
-                        true -> sendData()
+                        true -> findNavController().navigate(R.id.fragment2, bundleOf("Bekbol" to "Mean" ))
                     }
                 }
             }
